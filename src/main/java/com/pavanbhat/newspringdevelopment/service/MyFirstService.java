@@ -11,7 +11,7 @@ public class MyFirstService {
     private  MyFirstClass myFirstClass;
 
     @Autowired
-    public void injectDependencies(@Qualifier("myFirstClass") MyFirstClass myFirstClass){
+    public void setMyFirstClass(@Qualifier("mySecondClass") MyFirstClass myFirstClass){
         this.myFirstClass = myFirstClass;
     }
 
