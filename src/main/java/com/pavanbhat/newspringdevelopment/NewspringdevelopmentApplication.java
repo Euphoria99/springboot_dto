@@ -1,5 +1,6 @@
 package com.pavanbhat.newspringdevelopment;
 
+import com.pavanbhat.newspringdevelopment.service.MyFirstService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,7 +10,7 @@ public class NewspringdevelopmentApplication {
 	public static void main(String[] args) {
 		var ctx = SpringApplication.run(NewspringdevelopmentApplication.class, args);
 
-		MyFirstClass myFirstClass = ctx.getBean("myBean", MyFirstClass.class);
-		System.out.println(myFirstClass.sayHello());
+		MyFirstService myFirstService = ctx.getBean(MyFirstService.class);
+		System.out.println(myFirstService.tellAStory());
 	}
 }
