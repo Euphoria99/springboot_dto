@@ -13,10 +13,4 @@ public class NewspringdevelopmentApplication {
 		MyFirstClass myFirstClass = ctx.getBean(MyFirstClass.class);
 		System.out.println(myFirstClass.sayHello());
 	}
-
-	@Bean
-	public MyFirstClass myFirstClass(){
-		return new MyFirstClass();
-	}
-
 }
