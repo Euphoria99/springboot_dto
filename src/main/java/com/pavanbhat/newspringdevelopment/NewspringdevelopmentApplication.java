@@ -12,8 +12,6 @@ public class NewspringdevelopmentApplication {
 
 		MyFirstService myFirstService = ctx.getBean(MyFirstService.class);
 		System.out.println(myFirstService.tellAStory());
-		System.out.println("The version : " + myFirstService.getJavaVersion());
-		System.out.println("The OS version : " + myFirstService.getOSName());
-		System.out.println("The prop value : " + myFirstService.readProp());
+		System.out.println("The Backend technology used as per custom properties file : " + myFirstService.getCustomPropertyFromAnotherFile());
 	}
 }

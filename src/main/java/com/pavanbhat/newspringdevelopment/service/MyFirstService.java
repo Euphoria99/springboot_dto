@@ -3,18 +3,21 @@ package com.pavanbhat.newspringdevelopment.service;
 import com.pavanbhat.newspringdevelopment.MyFirstClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
+@PropertySource("classpath:custom.properties")
 public class MyFirstService {
 
     private  MyFirstClass myFirstClass;
 
-    private Environment environment;
+    @Value("${backend.tech}")
+    private String customPropertyFromAnotherFile;
 
-    @Autowired
-    public void setMyFirstClass(@Qualifier("mySecondClass") MyFirstClass myFirstClass){
+    public MyFirstService(@Qualifier("mySecondClass") MyFirstClass myFirstClass){
         this.myFirstClass = myFirstClass;
     }
 
@@ -22,21 +25,7 @@ public class MyFirstService {
         return "The Dependy is saying : " + myFirstClass.sayHello();
     }
 
-    @Autowired
-    public void setEnvironment(Environment environment){
-        this.environment = environment;
+    public String getCustomPropertyFromAnotherFile() {
+        return customPropertyFromAnotherFile;
     }
-
-    public String getJavaVersion(){
-        return environment.getProperty("java.version");
-    }
-
-    public String getOSName(){
-        return environment.getProperty("os.name");
-    }
-
-    public String readProp(){
-        return environment.getProperty("custom.property.value");
-    }
-
 }
