@@ -8,12 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class MyFirstService {
 
-    private final MyFirstClass myFirstClass;
-
     @Autowired
-    public MyFirstService(MyFirstClass myFirstClass) {
-        this.myFirstClass = myFirstClass;
-    }
+    private  MyFirstClass myFirstClass;
 
     public String tellAStory(){
         return "The Dependy is saying : " + myFirstClass.sayHello();
