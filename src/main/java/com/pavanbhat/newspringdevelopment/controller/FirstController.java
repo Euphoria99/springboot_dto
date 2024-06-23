@@ -1,6 +1,6 @@
 package com.pavanbhat.newspringdevelopment.controller;
 
-import org.springframework.http.HttpStatus;
+import com.pavanbhat.newspringdevelopment.Order;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,5 +14,10 @@ public class FirstController {
     @PostMapping("/post")
     public String post(@RequestBody String name){
         return "Request Accepted " + name;
+    }
+
+    @PostMapping("/post-order")
+    public String postOrder(@RequestBody Order order){
+        return "Accepted order : " + order.toString();
     }
 }
