@@ -1,8 +1,17 @@
 package com.pavanbhat.newspringdevelopment;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Order {
+
+    @JsonProperty("c-name")
+
     private String customerName;
+
+    @JsonProperty("p-name")
     private String productName;
+
+    @JsonProperty("qty")
     private int quantity;
 
     private Order(){
