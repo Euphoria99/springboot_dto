@@ -19,7 +19,7 @@ public class MyFirstService {
     private String customProperty;
 
 
-    public MyFirstService(@Qualifier("mySecondClass") MyFirstClass myFirstClass){
+    public MyFirstService(@Qualifier("myFirstClass") MyFirstClass myFirstClass){
         this.myFirstClass = myFirstClass;
     }
 
