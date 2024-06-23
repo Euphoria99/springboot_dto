@@ -12,7 +12,6 @@ public class NewspringdevelopmentApplication {
 
 		MyFirstService myFirstService = ctx.getBean(MyFirstService.class);
 		System.out.println(myFirstService.tellAStory());
-		System.out.println("The Backend technology used as per custom properties file : " + myFirstService.getCustomPropertyFromAnotherFile());
-		System.out.println("The Frontend technology used as per custom properties file 2 : " + myFirstService.getCustomPropertyFromAnotherFileTwo());
+		System.out.println("The custom property from file : " + myFirstService.getCustomProperty());
 	}
 }

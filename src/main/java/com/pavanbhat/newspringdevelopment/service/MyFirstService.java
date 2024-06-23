@@ -10,19 +10,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
-@PropertySources({
-        @PropertySource("classpath:custom.properties"),
-        @PropertySource("classpath:custom-two.properties")
-})
 public class MyFirstService {
 
-    private  MyFirstClass myFirstClass;
+    private  final MyFirstClass myFirstClass;
 
-    @Value("${backend.tech}")
-    private String customPropertyFromAnotherFile;
 
-    @Value("${frontend.tech}")
-    private String customPropertyFromAnotherFileTwo;
+    @Value("${custom.property.value}")
+    private String customProperty;
+
 
     public MyFirstService(@Qualifier("mySecondClass") MyFirstClass myFirstClass){
         this.myFirstClass = myFirstClass;
@@ -32,11 +27,7 @@ public class MyFirstService {
         return "The Dependy is saying : " + myFirstClass.sayHello();
     }
 
-    public String getCustomPropertyFromAnotherFile() {
-        return customPropertyFromAnotherFile;
-    }
-
-    public String getCustomPropertyFromAnotherFileTwo() {
-        return customPropertyFromAnotherFileTwo;
+    public String getCustomProperty() {
+        return customProperty;
     }
 }
