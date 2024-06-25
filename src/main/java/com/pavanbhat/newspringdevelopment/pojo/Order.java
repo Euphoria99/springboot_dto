@@ -1,4 +1,4 @@
-package com.pavanbhat.newspringdevelopment;
+package com.pavanbhat.newspringdevelopment.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

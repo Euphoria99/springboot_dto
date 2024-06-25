@@ -1,6 +1,6 @@
 package com.pavanbhat.newspringdevelopment.controller;
 
-import com.pavanbhat.newspringdevelopment.Order;
+import com.pavanbhat.newspringdevelopment.pojo.Order;
 import com.pavanbhat.newspringdevelopment.record.OrderRecord;
 import org.springframework.web.bind.annotation.*;
 
