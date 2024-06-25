@@ -1,6 +1,7 @@
 package com.pavanbhat.newspringdevelopment.controller;
 
 import com.pavanbhat.newspringdevelopment.Order;
+import com.pavanbhat.newspringdevelopment.record.OrderRecord;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,11 @@ public class FirstController {
 
     @PostMapping("/post-order")
     public String postOrder(@RequestBody Order order){
+        return "Accepted order : " + order.toString();
+    }
+
+    @PostMapping("/post-order-record")
+    public String postOrderRecord(@RequestBody OrderRecord order){
         return "Accepted order : " + order.toString();
     }
 }
