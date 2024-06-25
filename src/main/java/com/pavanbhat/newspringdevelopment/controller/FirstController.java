@@ -32,4 +32,10 @@ public class FirstController {
 
         return "my value equals = " + userName;
     }
+
+    //localhost:8080/full-name?param_name_1=value_1&param_name_2=value_2
+    @GetMapping("/full-name")
+    public String paramVar(@RequestParam("first-name") String firstName,@RequestParam("last-name") String lastName ){
+        return "The name is " + firstName + "  " + lastName;
+    }
 }
