@@ -26,4 +26,10 @@ public class FirstController {
     public String postOrderRecord(@RequestBody OrderRecord order){
         return "Accepted order : " + order.toString();
     }
+
+    @GetMapping("/hello/{user-name}")
+    public String pathVar(@PathVariable("user-name") String userName){
+
+        return "my value equals = " + userName;
+    }
 }
