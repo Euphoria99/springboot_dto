@@ -1,17 +1,20 @@
 package com.pavanbhat.newspringdevelopment.controller;
 
+import com.pavanbhat.newspringdevelopment.entity.Student;
+import com.pavanbhat.newspringdevelopment.repo.StudentRepository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class FirstController {
 
-    @GetMapping("/hello")
-    public String sayHello(){
-        return "hello from my first controller!";
+    private final StudentRepository repository;
+
+    public FirstController(StudentRepository repository){
+        this.repository = repository;
     }
 
-    @PostMapping("/post")
-    public String post(@RequestBody String name){
-        return "Request Accepted " + name;
+    @PostMapping("/students")
+    public Student post(@RequestBody Student student){
+        return  repository.save(student);
     }
 }
