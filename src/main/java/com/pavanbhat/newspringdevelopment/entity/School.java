@@ -3,6 +3,8 @@ package com.pavanbhat.newspringdevelopment.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class School {
 
@@ -11,6 +13,9 @@ public class School {
     private Integer id;
 
     private String name;
+
+    @OneToMany(mappedBy = "school")
+    private List<Student> students;
 
     public School() {
     }
