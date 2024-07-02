@@ -21,8 +21,8 @@ public class Student {
     private String email;
     private int age;
 
-    @Column(updatable = false)
-    private String test_column;
+    @OneToOne(mappedBy ="student", cascade = CascadeType.ALL)
+    private StudentProfile studentProfile;
 
     private Student(){
 
