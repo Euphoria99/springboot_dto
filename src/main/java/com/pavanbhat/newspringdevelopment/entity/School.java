@@ -1,6 +1,7 @@
 package com.pavanbhat.newspringdevelopment.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -9,12 +10,13 @@ import java.util.List;
 public class School {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String name;
 
     @OneToMany(mappedBy = "school")
+    @JsonManagedReference
     private List<Student> students;
 
     public School() {
