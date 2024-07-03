@@ -31,7 +31,7 @@ public class Student {
     @JsonBackReference
     private School school;
 
-    private Student(){
+    public Student(){
 
     }
 
@@ -80,6 +80,10 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     @Override
