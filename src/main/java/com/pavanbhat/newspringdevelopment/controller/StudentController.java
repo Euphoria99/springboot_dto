@@ -1,6 +1,7 @@
 package com.pavanbhat.newspringdevelopment.controller;
 
 import com.pavanbhat.newspringdevelopment.dto.StudentDto;
+import com.pavanbhat.newspringdevelopment.dto.StudentResponseDto;
 import com.pavanbhat.newspringdevelopment.entity.School;
 import com.pavanbhat.newspringdevelopment.entity.Student;
 import com.pavanbhat.newspringdevelopment.repo.StudentRepository;
@@ -19,9 +20,10 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public Student post(@RequestBody StudentDto dto){
+    public StudentResponseDto post(@RequestBody StudentDto dto){
         var student = toStudent(dto);
-        return  repository.save(student);
+        var savedStudent = repository.save(student);
+        return toStudentReposeDto(savedStudent);
     }
 
 
@@ -37,6 +39,14 @@ public class StudentController {
         student.setSchool(school);
 
         return student;
+    }
+
+    private StudentResponseDto toStudentReposeDto(Student student){
+        return new StudentResponseDto(
+                student.getFirstName(),
+                student.getLastName(),
+                student.getEmail()
+        );
     }
 
     @GetMapping("/students")
