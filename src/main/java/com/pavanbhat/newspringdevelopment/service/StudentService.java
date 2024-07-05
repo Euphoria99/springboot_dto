@@ -8,6 +8,7 @@ import com.pavanbhat.newspringdevelopment.repo.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -28,19 +29,26 @@ public class StudentService {
     }
 
     //find all student
-    public List<Student> findAllStudent(){
-        return  repository.findAll();
+    public List<StudentResponseDto> findAllStudent(){
+        return  repository.findAll()
+                .stream()
+                .map(studentMapper::toStudentReposeDto)
+                .collect(Collectors.toList());
     }
 
     //find by student id
-    public Student findById(Integer id){
+    public StudentResponseDto findById(Integer id){
         return  repository.findById(id)
+                .map(studentMapper::toStudentReposeDto)
                 .orElse(null);
     }
 
     //find by student first name
-    public List<Student> findByStudentFirstName(String name){
-        return  repository.findAllByFirstNameContaining(name);
+    public List<StudentResponseDto> findByStudentFirstName(String name){
+        return  repository.findAllByFirstNameContaining(name)
+                .stream()
+                .map(studentMapper::toStudentReposeDto)
+                .collect(Collectors.toList());
     }
 
     //delete a student
