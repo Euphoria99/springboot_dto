@@ -11,6 +11,9 @@ public class StudentMapper {
 
 
     public Student toStudent(StudentDto dto){
+        if (dto == null) {
+            throw new IllegalArgumentException("The StudentDto cannot be null");
+        }
         var student = new Student();
         student.setFirstName(dto.firstName());
         student.setLastName(dto.lastName());

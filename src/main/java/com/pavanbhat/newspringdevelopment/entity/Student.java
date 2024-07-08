@@ -86,6 +86,10 @@ public class Student {
         this.school = school;
     }
 
+    public School getSchool() {
+        return school;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
