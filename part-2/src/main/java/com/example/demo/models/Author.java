@@ -7,8 +7,9 @@ import java.time.LocalDateTime;
 
 //@Getter
 //@Setter
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 @Entity
 @Table(name="author_tbl")
@@ -20,31 +21,21 @@ public class Author {
 //    @TableGenerator(name="author_id_gen", table="id_generator", pkColumnName = "id_name", valueColumnName = "id_value", allocationSize = 1)
     private Integer id;
 
-    @Column(
-            name="f_name",
-            length = 35
-    )
+    @Column(name="f_name", length = 35)
     private String firstName;
 
     private String lastName;
 
-    @Column(
-            unique = true,
-            nullable = false
-    )
+    @Column(unique = true, nullable = false)
     private String email;
 
     private int age;
 
-    @Column(
-            updatable = false,
-            nullable = false
-    )
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(
-            insertable = false
-    )
+    @Column(insertable = false)
     private LocalDateTime lastModified;
+
 
 }
