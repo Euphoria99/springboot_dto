@@ -1,7 +1,10 @@
 package com.example.demo;
 
 import com.example.demo.models.Author;
+import com.example.demo.models.Resource;
+import com.example.demo.models.Video;
 import com.example.demo.repository.AuthorRepository;
+import com.example.demo.repository.VideoRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +18,7 @@ public class DemoForSpringDataApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(AuthorRepository repository){
+	public CommandLineRunner commandLineRunner(AuthorRepository repository, VideoRepository videoRepository){
 		return  args -> {
 			var author = Author.builder()
 					.firstName("Pavan")
@@ -24,7 +27,14 @@ public class DemoForSpringDataApplication {
 					.age(25)
 					.build();
 
-			repository.save(author);
+//			repository.save(author);
+
+			var video = Video.builder()
+					.name("testName")
+					.length(5)
+					.build();
+			videoRepository.save(video);
+
 		};
 	}
 }
