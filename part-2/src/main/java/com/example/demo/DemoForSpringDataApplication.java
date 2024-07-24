@@ -5,6 +5,7 @@ import com.example.demo.models.Resource;
 import com.example.demo.models.Video;
 import com.example.demo.repository.AuthorRepository;
 import com.example.demo.repository.VideoRepository;
+import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,20 +21,27 @@ public class DemoForSpringDataApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AuthorRepository repository, VideoRepository videoRepository){
 		return  args -> {
-			var author = Author.builder()
-					.firstName("Pavan")
-					.lastName("Bhat")
-					.email("pavanbhat@gmail.com")
-					.age(25)
-					.build();
+			Faker faker = new Faker();
+			for(int i=0;i < 50; i++ ){
 
-//			repository.save(author);
+//				String localPart = faker.internet().emailAddress().split("@")[0];
+//				String emailWithCustomMailServer = localPart + "@gmail.com";
 
-			var video = Video.builder()
+				var author = Author.builder()
+						.firstName(faker.name().firstName())
+						.lastName(faker.name().lastName())
+						.email("randomGuy" + i + "@gmail.com")
+						.age(faker.number().numberBetween(25,55))
+						.build();
+//				repository.save(author);
+			}
+
+
+/*			var video = Video.builder()
 					.name("testName")
 					.length(5)
 					.build();
-			videoRepository.save(video);
+			videoRepository.save(video);*/
 
 		};
 	}
