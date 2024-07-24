@@ -49,8 +49,11 @@ public class DemoForSpringDataApplication {
 
 
 			//update author a set a.age = 22 where a.id = 1
-			repository.updateAuthor(22, 1);
-			
+			repository.updateAgeAuthor(22, 1);
+
+			//update all authors
+			repository.updateAgeofAllAuthor(55);
+
 		};
 	}
 }
