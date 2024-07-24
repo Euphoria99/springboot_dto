@@ -36,6 +36,16 @@ public class DemoForSpringDataApplication {
 //				repository.save(author);
 			}
 
+			//updating author with ID=1
+			var author = Author.builder()
+					.id(1)
+					.firstName("Pavan")
+					.lastName("Bhat")
+					.email("pavanbhat@gmail.com")
+					.age(25)
+					.build();
+
+			repository.save(author);
 
 /*			var video = Video.builder()
 					.name("testName")
