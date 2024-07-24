@@ -47,12 +47,10 @@ public class DemoForSpringDataApplication {
 
 			repository.save(author);
 
-/*			var video = Video.builder()
-					.name("testName")
-					.length(5)
-					.build();
-			videoRepository.save(video);*/
 
+			//update author a set a.age = 22 where a.id = 1
+			repository.updateAuthor(22, 1);
+			
 		};
 	}
 }
