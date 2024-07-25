@@ -42,5 +42,11 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> {
     int updateAgeofAllAuthor(int age);
 
 
+    //find by specific age
     List<Author> findByNamedQuery(@Param("age") int age);
+
+    //update  age of all authors by a number
+    @Modifying
+    @Transactional
+    void updateByNamedQuery(@Param("age") int age);
 }
