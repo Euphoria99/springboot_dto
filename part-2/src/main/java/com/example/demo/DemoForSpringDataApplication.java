@@ -57,7 +57,7 @@ public class DemoForSpringDataApplication {
 //			repository.updateAgeofAllAuthor(55);
 
 //			repository.findByNamedQuery(26).forEach(System.out::println);
-			
+
 			repository.updateByNamedQuery(27);
 		};
 
