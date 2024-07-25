@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.models.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface AuthorRepository extends JpaRepository<Author, Integer> {
+public interface AuthorRepository extends JpaRepository<Author, Integer> , JpaSpecificationExecutor<Author> {
 
     //select * from author where first_name = ${params}
     List<Author> findAllByFirstName(String fn);

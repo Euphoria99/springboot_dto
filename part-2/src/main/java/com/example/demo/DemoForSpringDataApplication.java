@@ -5,11 +5,13 @@ import com.example.demo.models.Resource;
 import com.example.demo.models.Video;
 import com.example.demo.repository.AuthorRepository;
 import com.example.demo.repository.VideoRepository;
+import com.example.demo.specification.AuthorSpecification;
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication
@@ -58,7 +60,22 @@ public class DemoForSpringDataApplication {
 
 //			repository.findByNamedQuery(26).forEach(System.out::println);
 
-			repository.updateByNamedQuery(27);
+//			repository.updateByNamedQuery(27);
+
+			//specification implementation
+
+			Specification<Author> spec = Specification
+										.where(AuthorSpecification.hasAge(35))
+												.and(AuthorSpecification.firstNameLike("Ca"));
+
+			System.out.println("Has Age and First Name Like");
+			repository.findAll(spec).forEach(System.out::println);
+
+			Specification<Author> spec2 = Specification
+					.where(AuthorSpecification.firstNameLike("Ca"));
+
+			System.out.println("Has First Name Like");
+			repository.findAll(spec2).forEach(System.out::println);
 		};
 
 	}
