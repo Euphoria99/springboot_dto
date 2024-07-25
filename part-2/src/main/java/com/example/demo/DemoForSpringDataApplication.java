@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication
 public class DemoForSpringDataApplication {
@@ -19,6 +20,7 @@ public class DemoForSpringDataApplication {
 	}
 
 	@Bean
+	@Transactional
 	public CommandLineRunner commandLineRunner(AuthorRepository repository, VideoRepository videoRepository){
 		return  args -> {
 			Faker faker = new Faker();
@@ -45,15 +47,17 @@ public class DemoForSpringDataApplication {
 					.age(25)
 					.build();
 
-			repository.save(author);
+//			repository.save(author);
 
 
 			//update author a set a.age = 22 where a.id = 1
-			repository.updateAgeAuthor(22, 1);
+//			repository.updateAgeAuthor(22, 1);
 
 			//update all authors
-			repository.updateAgeofAllAuthor(55);
+//			repository.updateAgeofAllAuthor(55);
 
+			repository.findByNamedQuery(26).forEach(System.out::println);
 		};
+
 	}
 }

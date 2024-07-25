@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@NamedQuery(
+  name="Author.findByNamedQuery",
+  query="select a from Author a where a.age >= :age"
+)
 public class Author extends Auditable{
 
     private String firstName;
@@ -32,7 +37,7 @@ public class Author extends Auditable{
     private LocalDateTime lastModified;
 
     //relation
-    @ManyToMany(mappedBy = "authors")
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
     private List<Course> courses;
 
 }
