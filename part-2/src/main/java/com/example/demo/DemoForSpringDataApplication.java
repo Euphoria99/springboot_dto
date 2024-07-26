@@ -68,14 +68,14 @@ public class DemoForSpringDataApplication {
 										.where(AuthorSpecification.hasAge(35))
 												.and(AuthorSpecification.firstNameLike("Ca"));
 
-			System.out.println("Has Age and First Name Like");
-			repository.findAll(spec).forEach(System.out::println);
+//			System.out.println("Has Age and First Name Like");
+//			repository.findAll(spec).forEach(System.out::println);
 
 			Specification<Author> spec2 = Specification
 					.where(AuthorSpecification.firstNameLike("Ca"));
 
-			System.out.println("Has First Name Like");
-			repository.findAll(spec2).forEach(System.out::println);
+//			System.out.println("Has First Name Like");
+//			repository.findAll(spec2).forEach(System.out::println);
 		};
 
 	}
