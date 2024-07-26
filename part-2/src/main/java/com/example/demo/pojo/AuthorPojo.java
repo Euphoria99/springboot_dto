@@ -1,6 +1,8 @@
 package com.example.demo.pojo;
 
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,23 +16,20 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class AuthorPojo implements Serializable {
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "First name is required")
+    @NotEmpty(message = "First name cannot be empty")
     private String firstName;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Last name is required")
+    @NotEmpty(message = "Last name cannot be empty")
     private String lastName;
 
-    @NotNull
-    @NotEmpty
-    private int age;
+    @NotNull(message = "Age is required")
+    @Min(value = 1, message = "Age should be greater than 0")
+    private Integer age;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Email is required")
+    @NotEmpty(message = "Email cannot be empty")
+    @Email(message = "Email is invalid")
     private String email;
-
-
-
-
 }

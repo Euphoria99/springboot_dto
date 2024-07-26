@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.AuthorPojo;
 import com.example.demo.service.AuthorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ public class AuthorController {
    }
 
    @PostMapping("/authors")
-   public  AuthorPojo postAuthors(@RequestBody AuthorPojo author){
+   public  AuthorPojo postAuthors(@Valid @RequestBody AuthorPojo author){
         return authorService.saveAuthor(author);
    }
 

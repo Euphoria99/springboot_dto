@@ -36,7 +36,7 @@ public class Author extends Auditable{
 
     private String email;
 
-    private int age;
+    private Integer age;
 
 
     private LocalDateTime createdAt;
