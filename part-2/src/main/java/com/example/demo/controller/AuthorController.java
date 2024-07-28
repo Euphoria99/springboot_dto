@@ -5,10 +5,8 @@ import com.example.demo.pojo.AuthorPojo;
 import com.example.demo.service.AuthorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,4 +30,8 @@ public class AuthorController {
         return authorService.saveAuthor(author);
    }
 
+    @GetMapping("/authors/{id}")
+    public ResponseEntity<?> findAuthorById(@PathVariable Integer id) {
+        return authorService.getAuthorById(id);
+    }
 }
