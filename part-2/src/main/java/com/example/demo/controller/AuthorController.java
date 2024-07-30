@@ -33,4 +33,9 @@ public class AuthorController {
     public AuthorPojo findAuthorById(@PathVariable("id") Integer id){
         return authorService.getAuthorById(id);
     }
+
+    @PutMapping("/authors")
+    public  AuthorPojo putAuthors(@Valid @RequestBody AuthorPojo author){
+        return authorService.putAuthor(author);
+    }
 }

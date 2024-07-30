@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class AuthorDto {
 
+    private int id;
+
     private String firstName;
 
     private String lastName;

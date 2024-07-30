@@ -16,6 +16,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class AuthorPojo implements Serializable {
 
+    private int id;
+
     @NotNull(message = "First name is required")
     @NotEmpty(message = "First name cannot be empty")
     private String firstName;

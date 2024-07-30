@@ -10,6 +10,7 @@ import com.example.demo.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -63,4 +64,28 @@ public class AuthorServiceImpl implements AuthorService {
             throw new ResourceNotFoundException("Author with id " + id + " not found");
         }
     }
+    @Override
+    public AuthorPojo putAuthor(AuthorPojo authorPojo) {
+        // Convert POJO to DTO
+        AuthorDto authorDto = authorMapper.toDto(authorPojo);
+
+        // Fetch the existing author
+        Author foundAuthor = authorRepository
+                .findById(authorDto.getId()).orElseThrow(
+                        () -> new ResourceNotFoundException("Author not found"));
+
+        // Update the fields of the found author with new values
+        foundAuthor.setFirstName(authorDto.getFirstName());
+        foundAuthor.setLastName(authorDto.getLastName());
+        foundAuthor.setEmail(authorDto.getEmail());
+        foundAuthor.setAge(authorDto.getAge());
+        foundAuthor.setLastModified(LocalDateTime.now());
+
+        // Save the updated author
+        Author savedAuthor = authorRepository.save(foundAuthor);
+
+        // Convert saved Author entity back to AuthorPojo
+        return authorMapper.toPojo(authorMapper.toDto(savedAuthor));
+    }
+
 }

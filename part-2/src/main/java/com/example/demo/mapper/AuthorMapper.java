@@ -14,6 +14,7 @@ public class AuthorMapper {
     // Converts AuthorDto to AuthorPojo
     public AuthorPojo toPojo(AuthorDto authorDto){
         return new AuthorPojo(
+                authorDto.getId(),
                 authorDto.getFirstName(),
                 authorDto.getLastName(),
                 authorDto.getAge(),
@@ -24,6 +25,7 @@ public class AuthorMapper {
     // Converts AuthorPojo to AuthorDto
     public AuthorDto toDto(AuthorPojo authorPojo) {
         return new AuthorDto(
+                authorPojo.getId(),
                 authorPojo.getFirstName(),
                 authorPojo.getLastName(),
                 authorPojo.getEmail(),
@@ -37,6 +39,7 @@ public class AuthorMapper {
     // Converts Author entity to AuthorDto - Retrieval
     public AuthorDto toDto(Author author){
         return new AuthorDto(
+                author.getId(),
                 author.getFirstName(),
                 author.getLastName(),
                 author.getEmail(),
@@ -51,6 +54,7 @@ public class AuthorMapper {
     // Converts AuthorDto to Author entity, - Persisting
     public Author toEntity(AuthorDto authorDto){
         Author author = new Author();
+        author.setId(author.getId());
         author.setFirstName(authorDto.getFirstName());
         author.setLastName(authorDto.getLastName());
         author.setEmail(authorDto.getEmail());
@@ -60,7 +64,4 @@ public class AuthorMapper {
         author.setCourses(authorDto.getCourses());
         return author;
     };
-
-
-
 }

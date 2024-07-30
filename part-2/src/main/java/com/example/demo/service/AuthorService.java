@@ -11,4 +11,6 @@ public interface AuthorService {
     AuthorPojo saveAuthor(AuthorPojo authorPojo);
 
     AuthorPojo getAuthorById(Integer id);
+
+    AuthorPojo putAuthor(AuthorPojo authorPojo);
 }
