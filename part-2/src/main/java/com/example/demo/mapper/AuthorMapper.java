@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.dto.AuthorDto;
 import com.example.demo.models.Author;
+import com.example.demo.pojo.AuthorPatchPojo;
 import com.example.demo.pojo.AuthorPojo;
 import org.springframework.stereotype.Component;
 
@@ -64,4 +65,16 @@ public class AuthorMapper {
         author.setCourses(authorDto.getCourses());
         return author;
     };
+
+    // Converts AuthorDto to AuthorPatchPojo
+    public AuthorPatchPojo toPatchPojo(AuthorDto authorDto){
+        return new AuthorPatchPojo(
+                authorDto.getId(),
+                authorDto.getFirstName(),
+                authorDto.getLastName(),
+                authorDto.getAge(),
+                authorDto.getEmail()
+
+        );
+    }
 }

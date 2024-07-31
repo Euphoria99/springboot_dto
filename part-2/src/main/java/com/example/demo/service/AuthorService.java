@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.pojo.AuthorPatchPojo;
 import com.example.demo.pojo.AuthorPojo;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface AuthorService {
     AuthorPojo getAuthorById(Integer id);
 
     AuthorPojo putAuthor(AuthorPojo authorPojo);
+
+    AuthorPatchPojo patchAuthor(Integer id, AuthorPatchPojo authorPojo);
 }

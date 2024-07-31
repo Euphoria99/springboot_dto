@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.pojo.AuthorPatchPojo;
 import com.example.demo.pojo.AuthorPojo;
 import com.example.demo.service.AuthorService;
 import jakarta.validation.Valid;
@@ -37,5 +38,10 @@ public class AuthorController {
     @PutMapping("/authors")
     public  AuthorPojo putAuthors(@Valid @RequestBody AuthorPojo author){
         return authorService.putAuthor(author);
+    }
+
+    @PatchMapping("/authors/{id}")
+    public AuthorPatchPojo patchAuthors(@PathVariable("id") Integer id, @RequestBody AuthorPatchPojo authorPojo){
+        return authorService.patchAuthor(id, authorPojo);
     }
 }

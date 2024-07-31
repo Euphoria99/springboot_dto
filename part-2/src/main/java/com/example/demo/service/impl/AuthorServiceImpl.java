@@ -4,6 +4,7 @@ import com.example.demo.dto.AuthorDto;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.mapper.AuthorMapper;
 import com.example.demo.models.Author;
+import com.example.demo.pojo.AuthorPatchPojo;
 import com.example.demo.pojo.AuthorPojo;
 import com.example.demo.repository.AuthorRepository;
 import com.example.demo.service.AuthorService;
@@ -86,6 +87,43 @@ public class AuthorServiceImpl implements AuthorService {
 
         // Convert saved Author entity back to AuthorPojo
         return authorMapper.toPojo(authorMapper.toDto(savedAuthor));
+    }
+
+    @Override
+    public AuthorPatchPojo patchAuthor(Integer id, AuthorPatchPojo authorPojo) {
+        Optional<Author> foundAuthor = authorRepository.findById(id);
+
+        if (foundAuthor.isPresent()) {
+            Author author = foundAuthor.get();
+
+            // Update fields directly on the Author entity
+            if (authorPojo.getFirstName() != null) {
+                author.setFirstName(authorPojo.getFirstName());
+            }
+            if (authorPojo.getLastName() != null) {
+                author.setLastName(authorPojo.getLastName());
+            }
+            if (authorPojo.getEmail() != null) {
+                author.setEmail(authorPojo.getEmail());
+            }
+            if (authorPojo.getAge() != null) {
+                author.setAge(authorPojo.getAge());
+            }
+
+            // Save the updated Author entity
+            author = authorRepository.save(author);
+
+            // Convert the updated Author entity back to AuthorPatchPojo and return it
+            return new AuthorPatchPojo(
+                    author.getId(),
+                    author.getFirstName(),
+                    author.getLastName(),
+                    author.getAge(),
+                    author.getEmail()
+            );
+        } else {
+            throw new ResourceNotFoundException("Author with id " + id + " not found or cannot be updated!");
+        }
     }
 
 }
