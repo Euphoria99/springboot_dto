@@ -9,6 +9,7 @@ import com.example.demo.pojo.AuthorPojo;
 import com.example.demo.repository.AuthorRepository;
 import com.example.demo.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -121,4 +122,15 @@ public class AuthorServiceImpl implements AuthorService {
         }
     }
 
+    @Override
+    public ResponseEntity<String> deleteAuthorById(Integer id){
+        Optional<Author> foundAuthor = authorRepository.findById(id);
+
+        if(foundAuthor.isPresent()){
+            authorRepository.deleteById(id);
+            return ResponseEntity.ok().body("Author deleted successfully.");
+        } else {
+            throw new ResourceNotFoundException("Author with id " + id + " not found and cannot be deleted");
+        }
+    }
 }
