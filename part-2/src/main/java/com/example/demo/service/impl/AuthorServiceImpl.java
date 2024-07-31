@@ -97,30 +97,25 @@ public class AuthorServiceImpl implements AuthorService {
             Author author = foundAuthor.get();
 
             // Update fields directly on the Author entity
-            if (authorPojo.getFirstName() != null) {
-                author.setFirstName(authorPojo.getFirstName());
-            }
-            if (authorPojo.getLastName() != null) {
-                author.setLastName(authorPojo.getLastName());
-            }
-            if (authorPojo.getEmail() != null) {
-                author.setEmail(authorPojo.getEmail());
-            }
-            if (authorPojo.getAge() != null) {
-                author.setAge(authorPojo.getAge());
-            }
+            Author updatedAuthor = Author.builder()
+                    .id(author.getId())
+                    .firstName(authorPojo.getFirstName() != null ? authorPojo.getFirstName() : author.getFirstName())
+                    .lastName(authorPojo.getLastName() != null ? authorPojo.getLastName() : author.getLastName())
+                    .email(authorPojo.getEmail() != null ? authorPojo.getEmail() : author.getEmail())
+                    .age(authorPojo.getAge() != null ? authorPojo.getAge() : author.getAge())
+                    .build();
 
             // Save the updated Author entity
-            author = authorRepository.save(author);
+            updatedAuthor = authorRepository.save(updatedAuthor);
 
-            // Convert the updated Author entity back to AuthorPatchPojo and return it
-            return new AuthorPatchPojo(
-                    author.getId(),
-                    author.getFirstName(),
-                    author.getLastName(),
-                    author.getAge(),
-                    author.getEmail()
-            );
+            // Convert the saved Author entity back to AuthorPatchPojo and return it
+            return AuthorPatchPojo.builder()
+                    .id(updatedAuthor.getId())
+                    .firstName(updatedAuthor.getFirstName())
+                    .lastName(updatedAuthor.getLastName())
+                    .age(updatedAuthor.getAge())
+                    .email(updatedAuthor.getEmail())
+                    .build();
         } else {
             throw new ResourceNotFoundException("Author with id " + id + " not found or cannot be updated!");
         }
