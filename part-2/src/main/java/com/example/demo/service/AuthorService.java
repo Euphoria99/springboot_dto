@@ -19,4 +19,6 @@ public interface AuthorService {
     AuthorPatchPojo patchAuthor(Integer id, AuthorPatchPojo authorPojo);
 
     ResponseEntity<String> deleteAuthorById(Integer id);
+
+    List<AuthorPojo> searchAuthors(String firstName, Integer age);
 }

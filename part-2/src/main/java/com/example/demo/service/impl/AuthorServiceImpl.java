@@ -133,4 +133,36 @@ public class AuthorServiceImpl implements AuthorService {
             throw new ResourceNotFoundException("Author with id " + id + " not found and cannot be deleted");
         }
     }
+
+    @Override
+    public  List<AuthorPojo> searchAuthors(String firstName, Integer age){
+        if (firstName != null && age != null) {
+            // If both firstName and age are provided, filter by both
+           List<Author>  foundAuthors = authorRepository.findAllByFirstNameStartsWithIgnoreCaseAndAge(firstName, age);
+
+            return foundAuthors.stream()
+                    .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
+                    .collect(Collectors.toList());
+
+        } else if (firstName != null) {
+            // If only firstName is provided, filter by firstName
+            List<Author>  foundAuthors = authorRepository.findAllByFirstNameIgnoreCase(firstName);
+
+            return foundAuthors.stream()
+                    .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
+                    .collect(Collectors.toList());
+        } else if (age != null) {
+            // If only age is provided, filter by age
+            List<Author>  foundAuthors = authorRepository.findByNamedQuery(age);
+            return foundAuthors.stream()
+                    .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
+                    .collect(Collectors.toList());
+        } else {
+            // If no parameters are provided, return all authors
+            List<Author>  foundAuthors = authorRepository.findAll();
+            return foundAuthors.stream()
+                    .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
+                    .collect(Collectors.toList());
+        }
+    };
 }

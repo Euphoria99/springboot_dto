@@ -50,4 +50,11 @@ public class AuthorController {
     public ResponseEntity<String> deleteAuthorById(@PathVariable("id") Integer id){
         return authorService.deleteAuthorById(id);
     }
+
+    @GetMapping("/authors/search")
+    public List<AuthorPojo> searchAuthors(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) Integer age){
+        return authorService.searchAuthors(firstName, age);
+    }
 }
