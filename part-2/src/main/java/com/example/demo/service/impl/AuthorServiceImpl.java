@@ -135,34 +135,26 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public  List<AuthorPojo> searchAuthors(String firstName, Integer age){
+    public List<AuthorPojo> searchAuthors(String firstName, Integer age) {
+        List<Author> foundAuthors;
+
         if (firstName != null && age != null) {
             // If both firstName and age are provided, filter by both
-           List<Author>  foundAuthors = authorRepository.findAllByFirstNameStartsWithIgnoreCaseAndAge(firstName, age);
-
-            return foundAuthors.stream()
-                    .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
-                    .collect(Collectors.toList());
-
+            foundAuthors = authorRepository.findAllByFirstNameStartsWithIgnoreCaseAndAge(firstName, age);
         } else if (firstName != null) {
             // If only firstName is provided, filter by firstName
-            List<Author>  foundAuthors = authorRepository.findAllByFirstNameIgnoreCase(firstName);
-
-            return foundAuthors.stream()
-                    .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
-                    .collect(Collectors.toList());
+            foundAuthors = authorRepository.findAllByFirstNameStartsWithIgnoreCase(firstName);
         } else if (age != null) {
             // If only age is provided, filter by age
-            List<Author>  foundAuthors = authorRepository.findByNamedQuery(age);
-            return foundAuthors.stream()
-                    .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
-                    .collect(Collectors.toList());
+            foundAuthors = authorRepository.findByNamedQuery(age);
         } else {
             // If no parameters are provided, return all authors
-            List<Author>  foundAuthors = authorRepository.findAll();
-            return foundAuthors.stream()
-                    .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
-                    .collect(Collectors.toList());
+            foundAuthors = authorRepository.findAll();
         }
-    };
+
+        return foundAuthors.stream()
+                .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
+                .collect(Collectors.toList());
+    }
+
 }
