@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -54,7 +55,10 @@ public class AuthorController {
     @GetMapping("/authors/search")
     public List<AuthorPojo> searchAuthors(
             @RequestParam(required = false) String firstName,
-            @RequestParam(required = false) Integer age){
-        return authorService.searchAuthors(firstName, age);
+            @RequestParam(required = false) Integer age,
+            @RequestParam(required = false) LocalDate from,
+            @RequestParam(required = false) LocalDate to
+    ){
+        return authorService.searchAuthors(firstName, age,from,to);
     }
 }

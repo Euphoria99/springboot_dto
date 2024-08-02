@@ -4,6 +4,7 @@ import com.example.demo.pojo.AuthorPatchPojo;
 import com.example.demo.pojo.AuthorPojo;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AuthorService {
@@ -20,5 +21,5 @@ public interface AuthorService {
 
     ResponseEntity<String> deleteAuthorById(Integer id);
 
-    List<AuthorPojo> searchAuthors(String firstName, Integer age);
+    List<AuthorPojo> searchAuthors(String firstName, Integer age, LocalDate from, LocalDate to);
 }

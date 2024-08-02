@@ -19,7 +19,8 @@ public class AuthorMapper {
                 authorDto.getFirstName(),
                 authorDto.getLastName(),
                 authorDto.getAge(),
-                authorDto.getEmail()
+                authorDto.getEmail(),
+                authorDto.getCreatedAt()
         );
     }
 
@@ -73,8 +74,8 @@ public class AuthorMapper {
                 authorDto.getFirstName(),
                 authorDto.getLastName(),
                 authorDto.getAge(),
-                authorDto.getEmail()
-
+                authorDto.getEmail(),
+                authorDto.getCreatedAt()
         );
     }
 }

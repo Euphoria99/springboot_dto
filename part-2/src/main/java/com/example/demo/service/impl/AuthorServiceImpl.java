@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -135,7 +136,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorPojo> searchAuthors(String firstName, Integer age) {
+    public List<AuthorPojo> searchAuthors(String firstName, Integer age, LocalDate from, LocalDate to) {
         List<Author> foundAuthors;
 
         if (firstName != null && age != null) {
@@ -147,6 +148,9 @@ public class AuthorServiceImpl implements AuthorService {
         } else if (age != null) {
             // If only age is provided, filter by age
             foundAuthors = authorRepository.findByNamedQuery(age);
+      } else if (from != null & to != null) {
+            // If from and to date is provided, filter by date
+            foundAuthors = authorRepository.findByCreatedAtBetween(from, to);
         } else {
             // If no parameters are provided, return all authors
             foundAuthors = authorRepository.findAll();

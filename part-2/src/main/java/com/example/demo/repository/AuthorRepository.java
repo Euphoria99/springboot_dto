@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Integer> , JpaSpecificationExecutor<Author> {
@@ -52,4 +53,7 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> , JpaSp
     @Modifying
     @Transactional
     void updateByNamedQuery(@Param("age") int age);
+
+    @Query("SELECT a FROM Author a WHERE DATE(a.createdAt) BETWEEN :from AND :to")
+    List<Author> findByCreatedAtBetween(@Param("from") LocalDate from, @Param("to") LocalDate to);
 }
