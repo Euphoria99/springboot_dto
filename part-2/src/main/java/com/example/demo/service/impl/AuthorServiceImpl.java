@@ -9,6 +9,9 @@ import com.example.demo.pojo.AuthorPojo;
 import com.example.demo.repository.AuthorRepository;
 import com.example.demo.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +34,10 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorPojo> getAllAuthors() {
-        List<Author> authors = authorRepository.findAll();
-        return authors.stream()
-                .map(author -> authorMapper.toPojo(authorMapper.toDto(author)))
-                .collect(Collectors.toList());
+    public Page<AuthorPojo> getAllAuthors(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Author> authors = authorRepository.findAll(pageable);
+        return authors.map(author -> authorMapper.toPojo(authorMapper.toDto(author)));
     }
 
     @Override

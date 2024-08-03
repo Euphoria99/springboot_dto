@@ -6,6 +6,7 @@ import com.example.demo.pojo.AuthorPojo;
 import com.example.demo.service.AuthorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +24,10 @@ public class AuthorController {
     }
 
     @GetMapping("/authors")
-    public List<AuthorPojo> getAllAuthors(){
-        return authorService.getAllAuthors();
+    public Page<AuthorPojo> getAllAuthors(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return authorService.getAllAuthors(page, size);
     }
 
     @PostMapping("/authors")

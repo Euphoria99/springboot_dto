@@ -2,14 +2,16 @@ package com.example.demo.service;
 
 import com.example.demo.pojo.AuthorPatchPojo;
 import com.example.demo.pojo.AuthorPojo;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
+import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.util.List;
 
 public interface AuthorService {
 
-    List<AuthorPojo> getAllAuthors();
+    Page<AuthorPojo> getAllAuthors(int page, int size);
 
     AuthorPojo saveAuthor(AuthorPojo authorPojo);
 
