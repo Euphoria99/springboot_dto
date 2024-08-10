@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/newspringdevelopment.iml" filepath="$PROJECT_DIR$/.idea/newspringdevelopment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/part-1/newspringdevelopment.iml" filepath="$PROJECT_DIR$/part-1/newspringdevelopment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/springboot_dto.iml" filepath="$PROJECT_DIR$/.idea/springboot_dto.iml" />
     </modules>
   </component>
 </project>
