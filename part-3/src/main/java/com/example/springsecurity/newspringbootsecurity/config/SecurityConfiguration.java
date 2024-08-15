@@ -24,8 +24,8 @@ public class SecurityConfiguration {
 
             http.csrf(csrf -> csrf.disable());
             http.authorizeHttpRequests(rQ -> {
-                rQ.requestMatchers("/api/**", "/signup/", "/signin/").permitAll();
-                rQ.requestMatchers("/api/search/", "/api/profile/", "/signout/").authenticated();
+                rQ.requestMatchers("/api/v1/auth/**").permitAll(); // you can use , and add endpoint types
+                rQ.requestMatchers("/api/v1/demo/**").authenticated(); // you can use , and add endpoint types
             });
             http.sessionManagement(sessionAuthenticationStrategy ->
                     sessionAuthenticationStrategy.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
