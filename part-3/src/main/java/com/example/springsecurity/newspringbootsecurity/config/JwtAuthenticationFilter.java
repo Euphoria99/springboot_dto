@@ -52,7 +52,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                System.out.println("Authentication successful for user: " + userEmail);
             }
         }
+        filterChain.doFilter(request, response);
     }
 }
