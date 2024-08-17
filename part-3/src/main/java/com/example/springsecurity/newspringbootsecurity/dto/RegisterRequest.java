@@ -5,6 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
+
+//used to create new user
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -18,4 +23,6 @@ public class RegisterRequest {
     private String email;
 
     private String password;
+
+    private LocalDateTime createdAt;
 }

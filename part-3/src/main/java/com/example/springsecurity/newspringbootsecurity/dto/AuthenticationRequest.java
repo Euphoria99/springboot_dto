@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//used to sign in
+
 @Data
 @Builder
 @AllArgsConstructor
