@@ -1,8 +1,9 @@
 package com.example.springsecurity.newspringbootsecurity.controller;
 
-import com.example.springsecurity.newspringbootsecurity.dto.AuthenticationRequest;
-import com.example.springsecurity.newspringbootsecurity.dto.AuthenticationResponse;
-import com.example.springsecurity.newspringbootsecurity.dto.RegisterRequest;
+
+import com.example.springsecurity.newspringbootsecurity.pojo.AuthenticationResponsePojo;
+import com.example.springsecurity.newspringbootsecurity.pojo.SignInPojo;
+import com.example.springsecurity.newspringbootsecurity.pojo.SignUpPojo;
 import com.example.springsecurity.newspringbootsecurity.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +20,15 @@ public class AuthenticationController {
     private final AuthenticationService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
+    public ResponseEntity<AuthenticationResponsePojo> register(
+            @RequestBody SignUpPojo request
     ){
         return  ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody AuthenticationRequest request
+    public ResponseEntity<AuthenticationResponsePojo> register(
+            @RequestBody SignInPojo request
     ){
         return  ResponseEntity.ok(authService.authenticate(request));
     }
