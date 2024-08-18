@@ -2,10 +2,13 @@ package com.example.springsecurity.newspringbootsecurity.service;
 
 import com.example.springsecurity.newspringbootsecurity.config.JwtService;
 import com.example.springsecurity.newspringbootsecurity.dto.AuthenticationRequest;
-import com.example.springsecurity.newspringbootsecurity.dto.AuthenticationResponse;
 import com.example.springsecurity.newspringbootsecurity.dto.RegisterRequest;
+import com.example.springsecurity.newspringbootsecurity.mapper.UserAuthMapper;
 import com.example.springsecurity.newspringbootsecurity.model.Role;
 import com.example.springsecurity.newspringbootsecurity.model.User;
+import com.example.springsecurity.newspringbootsecurity.pojo.AuthenticationResponsePojo;
+import com.example.springsecurity.newspringbootsecurity.pojo.SignInPojo;
+import com.example.springsecurity.newspringbootsecurity.pojo.SignUpPojo;
 import com.example.springsecurity.newspringbootsecurity.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +16,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -26,35 +31,44 @@ public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    private final UserAuthMapper userAuthMapper;
+
+    public AuthenticationResponsePojo register(SignUpPojo request) {
+        RegisterRequest registerRequest = userAuthMapper.toRegDto(request);
+
         var user = User.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
+                .firstName(registerRequest.getFirstName())
+                .lastName(registerRequest.getLastName())
+                .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .createdAt(registerRequest.getCreatedAt())
                 .build();
 
         repository.save(user);
 
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse
+        return AuthenticationResponsePojo
                 .builder()
                 .token(jwtToken)
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponsePojo authenticate(SignInPojo request) {
+
+        AuthenticationRequest signInRequest = userAuthMapper.toAutDto(request);
+
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
+                        signInRequest.getEmail(),
+                        signInRequest.getPassword()
                 )
         );
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse
+        return AuthenticationResponsePojo
                 .builder()
                 .token(jwtToken)
                 .build();
