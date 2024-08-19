@@ -5,6 +5,7 @@ import com.example.springsecurity.newspringbootsecurity.pojo.AuthenticationRespo
 import com.example.springsecurity.newspringbootsecurity.pojo.SignInPojo;
 import com.example.springsecurity.newspringbootsecurity.pojo.SignUpPojo;
 import com.example.springsecurity.newspringbootsecurity.service.AuthenticationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,14 +22,14 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponsePojo> register(
-            @RequestBody SignUpPojo request
+         @Valid @RequestBody SignUpPojo request
     ){
         return  ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponsePojo> register(
-            @RequestBody SignInPojo request
+            @Valid   @RequestBody SignInPojo request
     ){
         return  ResponseEntity.ok(authService.authenticate(request));
     }
