@@ -1,4 +1,4 @@
-package com.example.springsecurity.newspringbootsecurity.service;
+package com.example.springsecurity.newspringbootsecurity.service.impl;
 
 import com.example.springsecurity.newspringbootsecurity.config.JwtService;
 import com.example.springsecurity.newspringbootsecurity.dto.AuthenticationRequest;
@@ -14,19 +14,19 @@ import com.example.springsecurity.newspringbootsecurity.pojo.AuthenticationRespo
 import com.example.springsecurity.newspringbootsecurity.pojo.SignInPojo;
 import com.example.springsecurity.newspringbootsecurity.pojo.SignUpPojo;
 import com.example.springsecurity.newspringbootsecurity.repo.UserRepository;
-import lombok.RequiredArgsConstructor;
+import com.example.springsecurity.newspringbootsecurity.service.AuthenticationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository repository;
 
@@ -38,6 +38,16 @@ public class AuthenticationService {
 
     private final UserAuthMapper userAuthMapper;
 
+    @Autowired
+    public AuthenticationServiceImpl(UserRepository repository, UserAuthMapper userAuthMapper, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
+        this.repository = repository;
+        this.userAuthMapper = userAuthMapper;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
+
+    @Override
     public AuthenticationResponsePojo register(SignUpPojo request) {
         try {
             // Check if the user already exists
@@ -73,6 +83,7 @@ public class AuthenticationService {
     }
 
 
+    @Override
     public AuthenticationResponsePojo authenticate(SignInPojo request) {
         try {
             AuthenticationRequest signInRequest = userAuthMapper.toAutDto(request);
