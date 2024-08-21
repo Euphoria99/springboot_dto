@@ -1,6 +1,6 @@
 package com.example.springsecurity.newspringbootsecurity.service.impl;
 
-import com.example.springsecurity.newspringbootsecurity.config.JwtService;
+import com.example.springsecurity.newspringbootsecurity.security.JwtService;
 import com.example.springsecurity.newspringbootsecurity.dto.AuthenticationRequest;
 import com.example.springsecurity.newspringbootsecurity.dto.RegisterRequest;
 import com.example.springsecurity.newspringbootsecurity.exception.InternalServerException;
