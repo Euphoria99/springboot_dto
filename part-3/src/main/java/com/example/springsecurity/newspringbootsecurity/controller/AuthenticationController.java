@@ -27,7 +27,7 @@ public class AuthenticationController {
         return  ResponseEntity.ok(authService.register(request));
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponsePojo> register(
             @Valid   @RequestBody SignInPojo request
     ){
